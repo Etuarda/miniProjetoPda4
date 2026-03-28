@@ -1,0 +1,201 @@
+{
+  "diagnosticResults": [
+    {
+      "id": "17c46027-c83f-4df8-b63c-ba90d4fd3630",
+      "userName": "Eduarda",
+      "scores": {
+        "http": 3.5,
+        "node": 3,
+        "api": 3,
+        "database": 2,
+        "architecture": 3
+      },
+      "createdAt": "2026-03-28T20:14:27.005Z"
+    },
+    {
+      "id": "74fd216e-d949-4984-b447-236d24be702b",
+      "userName": "Eduarda",
+      "scores": {
+        "http": 4,
+        "node": 4,
+        "api": 4,
+        "database": 4,
+        "architecture": 4
+      },
+      "createdAt": "2026-03-28T20:16:05.126Z"
+    },
+    {
+      "id": "7ff1f424-8ec0-49ab-94a7-4a9bd3434eac",
+      "userName": "Eduarda",
+      "scores": {
+        "http": 4,
+        "node": 4,
+        "api": 4,
+        "database": 4,
+        "architecture": 4
+      },
+      "createdAt": "2026-03-28T20:23:20.899Z"
+    },
+    {
+      "id": "64dced92-910a-4fe0-95d3-9c4e2bb7b2fa",
+      "userName": "Eduarda",
+      "scores": {
+        "http": 4,
+        "node": 4,
+        "api": 4,
+        "database": 4,
+        "architecture": 4
+      },
+      "createdAt": "2026-03-28T20:32:28.932Z"
+    },
+    {
+      "id": "fe4756b9-a006-4a72-925b-17f5cce88ff7",
+      "userName": "Eduarda",
+      "scores": {
+        "http": 3.5,
+        "node": 3.5,
+        "api": 3,
+        "database": 1.5,
+        "architecture": 1.5
+      },
+      "createdAt": "2026-03-28T20:36:05.755Z"
+    },
+    {
+      "id": "e9438d2c-7c68-4459-a301-bb3d5926719f",
+      "userName": "Eduarda",
+      "scores": {
+        "http": 4,
+        "node": 4.5,
+        "api": 5,
+        "database": 5,
+        "architecture": 5
+      },
+      "createdAt": "2026-03-28T20:40:49.319Z"
+    }
+  ],
+  "roadmaps": [
+    {
+      "id": "1c434fb4-5bac-4751-bbe8-772f2ec9e0ca",
+      "diagnosticResultId": "17c46027-c83f-4df8-b63c-ba90d4fd3630",
+      "title": "Roadmap Backend Node.js - Eduarda",
+      "status": "active",
+      "createdAt": "2026-03-28T20:14:28.740Z"
+    },
+    {
+      "id": "6b8aa8e0-e3a4-495c-820c-7770b27c5cbb",
+      "diagnosticResultId": "74fd216e-d949-4984-b447-236d24be702b",
+      "title": "Roadmap Backend Node.js - Eduarda",
+      "status": "active",
+      "createdAt": "2026-03-28T20:16:06.958Z"
+    },
+    {
+      "id": "8be4101f-3df1-40bb-992e-5b1fbb9125c4",
+      "diagnosticResultId": "7ff1f424-8ec0-49ab-94a7-4a9bd3434eac",
+      "title": "Roadmap Backend Node.js - Eduarda",
+      "status": "active",
+      "createdAt": "2026-03-28T20:23:24.236Z"
+    },
+    {
+      "id": "b876dc87-4597-4d9e-9f35-4ee409c3cda5",
+      "diagnosticResultId": "64dced92-910a-4fe0-95d3-9c4e2bb7b2fa",
+      "title": "Roadmap Backend Node.js - Eduarda",
+      "status": "active",
+      "createdAt": "2026-03-28T20:32:32.827Z"
+    },
+    {
+      "id": "65470796-31d1-47d1-a9b1-4a149e183acd",
+      "diagnosticResultId": "fe4756b9-a006-4a72-925b-17f5cce88ff7",
+      "title": "Roadmap Backend Node.js - Eduarda",
+      "status": "completed",
+      "createdAt": "2026-03-28T20:36:07.428Z",
+      "updatedAt": "2026-03-28T20:40:00.328Z"
+    },
+    {
+      "id": "d32e3436-3916-469d-a0c3-d6048460bf26",
+      "diagnosticResultId": "e9438d2c-7c68-4459-a301-bb3d5926719f",
+      "title": "Roadmap Backend Node.js - Eduarda",
+      "status": "active",
+      "createdAt": "2026-03-28T20:40:50.835Z"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "94e46379-bd2c-461d-9c83-d1d9c26f537a",
+      "roadmapId": "1c434fb4-5bac-4751-bbe8-772f2ec9e0ca",
+      "axis": "database",
+      "title": "Modelar banco relacional com SQL básico",
+      "description": "Crie duas entidades relacionadas e implemente consultas com relacionamento, chave estrangeira e integridade.",
+      "status": "pending",
+      "explanation": "",
+      "experiment": "",
+      "notes": "",
+      "createdAt": "2026-03-28T20:14:28.740Z",
+      "updatedAt": null
+    },
+    {
+      "id": "4eb0a813-036c-440a-b288-f5a747117138",
+      "roadmapId": "1c434fb4-5bac-4751-bbe8-772f2ec9e0ca",
+      "axis": "database",
+      "title": "Comparar relacional vs NoSQL",
+      "description": "Descreva trade-offs de consistência, flexibilidade de schema e cenários de uso para cada abordagem.",
+      "status": "pending",
+      "explanation": "",
+      "experiment": "",
+      "notes": "",
+      "createdAt": "2026-03-28T20:14:28.740Z",
+      "updatedAt": null
+    },
+    {
+      "id": "f1367c7c-9b86-4802-adfd-5a6b11b1ac40",
+      "roadmapId": "65470796-31d1-47d1-a9b1-4a149e183acd",
+      "axis": "database",
+      "title": "Modelar banco relacional com SQL básico",
+      "description": "Crie duas entidades relacionadas e implemente consultas com relacionamento, chave estrangeira e integridade.",
+      "status": "completed",
+      "explanation": "",
+      "experiment": "",
+      "notes": "",
+      "createdAt": "2026-03-28T20:36:07.428Z",
+      "updatedAt": "2026-03-28T20:39:56.540Z"
+    },
+    {
+      "id": "431d15ee-4d45-4f8b-b984-55a9fee46a96",
+      "roadmapId": "65470796-31d1-47d1-a9b1-4a149e183acd",
+      "axis": "database",
+      "title": "Comparar relacional vs NoSQL",
+      "description": "Descreva trade-offs de consistência, flexibilidade de schema e cenários de uso para cada abordagem.",
+      "status": "completed",
+      "explanation": "",
+      "experiment": "",
+      "notes": "",
+      "createdAt": "2026-03-28T20:36:07.428Z",
+      "updatedAt": "2026-03-28T20:39:58.936Z"
+    },
+    {
+      "id": "b98b6e24-255b-47aa-8e68-8ca962842b6a",
+      "roadmapId": "65470796-31d1-47d1-a9b1-4a149e183acd",
+      "axis": "architecture",
+      "title": "Aplicar MVC com Service Layer",
+      "description": "Separe um backend em routes, controllers, services e repositories com baixo acoplamento.",
+      "status": "completed",
+      "explanation": "",
+      "experiment": "",
+      "notes": "",
+      "createdAt": "2026-03-28T20:36:07.428Z",
+      "updatedAt": "2026-03-28T20:39:53.647Z"
+    },
+    {
+      "id": "e932716e-d842-47a7-b830-40d44b5fa7eb",
+      "roadmapId": "65470796-31d1-47d1-a9b1-4a149e183acd",
+      "axis": "architecture",
+      "title": "Melhorar observabilidade e manutenção",
+      "description": "Adicione logs básicos, tratamento de erros, estrutura previsível e checklist de escalabilidade para evolução futura.",
+      "status": "completed",
+      "explanation": "",
+      "experiment": "",
+      "notes": "",
+      "createdAt": "2026-03-28T20:36:07.428Z",
+      "updatedAt": "2026-03-28T20:40:00.315Z"
+    }
+  ]
+}

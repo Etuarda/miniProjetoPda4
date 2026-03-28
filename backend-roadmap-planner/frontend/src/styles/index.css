@@ -1,0 +1,79 @@
+/* Importa fontes do Google Fonts para tipografia elegante */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+/* Importa utilitários do Tailwind CSS */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Estilos globais da aplicação */
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background-color: #FAF8F6;
+  color: #3E2723;
+}
+
+/* Família serifada para títulos e elementos especiais */
+h1, h2, h3, h4, .font-serif {
+  font-family: 'Playfair Display', serif;
+}
+
+/* Animações customizadas para transições suaves */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn .9s cubic-bezier(.16, 1, .3, 1) forwards;
+}
+
+.animate-slideUp {
+  animation: slideUp .7s cubic-bezier(.16, 1, .3, 1) forwards;
+}
+
+/* Estilos para simular aparência de bloco de notas */
+.notepad-container {
+  background-color: #FFFCF9;
+}
+
+.notepad-lines {
+  line-height: 2rem;
+  background-image: repeating-linear-gradient(transparent, transparent 31px, #EFEBE9 31px, #EFEBE9 32px);
+  background-attachment: local;
+}
+
+/* Customização da scrollbar para melhor UX */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #FAF8F6;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #D7CCC8;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #A1887F;
+}

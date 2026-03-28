@@ -1,0 +1,22 @@
+[
+  {"axis":"http","threshold":2,"tasks":[
+    {"title":"Revisar semântica HTTP e status codes","description":"Implemente endpoints usando GET, POST, PATCH e DELETE com status code coerente e payload consistente."},
+    {"title":"Estudar HTTPS, CORS e fluxo request/response","description":"Mapeie o caminho de uma requisição do cliente até a API e documente headers, CORS e diferenças entre HTTP e HTTPS."}
+  ]},
+  {"axis":"node","threshold":2,"tasks":[
+    {"title":"Praticar async/await com tratamento centralizado de erros","description":"Refatore handlers assíncronos para usar async/await, early return e middleware de erro."},
+    {"title":"Dominar modularização com ESM","description":"Separe um projeto em routes, controllers, services e repositories usando import/export com responsabilidade única."}
+  ]},
+  {"axis":"api","threshold":2,"tasks":[
+    {"title":"Construir CRUD REST com Express","description":"Implemente GET, POST, PATCH e DELETE com validação, respostas padronizadas e mensagens de erro claras."},
+    {"title":"Adicionar autenticação e noções de segurança","description":"Crie um fluxo simples de autenticação com hashing, JWT e revisão de vulnerabilidades comuns em APIs."}
+  ]},
+  {"axis":"database","threshold":2,"tasks":[
+    {"title":"Modelar banco relacional com SQL básico","description":"Crie duas entidades relacionadas e implemente consultas com relacionamento, chave estrangeira e integridade."},
+    {"title":"Comparar relacional vs NoSQL","description":"Descreva trade-offs de consistência, flexibilidade de schema e cenários de uso para cada abordagem."}
+  ]},
+  {"axis":"architecture","threshold":2,"tasks":[
+    {"title":"Aplicar MVC com Service Layer","description":"Separe um backend em routes, controllers, services e repositories com baixo acoplamento."},
+    {"title":"Melhorar observabilidade e manutenção","description":"Adicione logs básicos, tratamento de erros, estrutura previsível e checklist de escalabilidade para evolução futura."}
+  ]}
+]
