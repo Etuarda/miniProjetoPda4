@@ -53,6 +53,8 @@ export default function App() {
 
   // Cálculos derivados: conta perguntas respondidas para validação
   const answeredQuestionsCount = useMemo(() => Object.keys(answers).length, [answers]);
+  const questionsCount = questions?.length ?? 0;
+
   // Conta tarefas concluídas para cálculo de progresso
   const completedTasks = tasks.filter((task) => task.status === 'completed').length;
   // Porcentagem de conclusão do roadmap
@@ -232,8 +234,8 @@ export default function App() {
         <div className="w-20 h-20 bg-[#D7CCC8] rounded-[2rem] flex items-center justify-center mb-8 rotate-3 shadow-lg shadow-[#D7CCC8]/20">
           <Leaf className="text-[#5D4037] w-10 h-10" />
         </div>
-        <h1 className="text-5xl md:text-7xl font-serif text-[#3E2723] mb-4 text-center">Backend Architect</h1>
-        <p className="text-[#5D4037] text-lg mb-12 text-center max-w-lg leading-relaxed font-medium">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-serif text-[#3E2723] mb-4 text-center">Backend Architect</h1>
+        <p className="text-[#5D4037] text-base sm:text-lg mb-12 text-center max-w-lg leading-relaxed font-medium">
           Uma plataforma de auto-análise para estudantes de desenvolvimennto que buscam o próximo nível de excelência em sistemas Node.js.
         </p>
 
@@ -242,16 +244,16 @@ export default function App() {
             event.preventDefault();
             if (userName.trim()) setStep('quiz');
           }}
-          className="bg-white p-2 rounded-2xl shadow-2xl border border-[#EFEBE9] flex w-full max-w-md"
+          className="bg-white p-2 sm:p-3 rounded-2xl shadow-2xl border border-[#EFEBE9] flex flex-wrap items-center gap-2 w-full max-w-full sm:max-w-lg"
         >
           <input
             type="text"
             placeholder="Como devemos lhe chamar?"
-            className="flex-1 px-6 py-3 bg-transparent outline-none text-[#5D4037] font-bold placeholder-[#8D6E63]"
+            className="flex-1 min-w-0 px-4 py-3 sm:px-6 sm:py-3 bg-transparent outline-none text-[#5D4037] font-bold placeholder-[#8D6E63]"
             value={userName}
             onChange={(event) => setUserName(event.target.value)}
           />
-          <Button type="submit" disabled={!userName.trim()}>
+          <Button type="submit" disabled={!userName.trim()} className="w-full sm:w-auto">
             Iniciar <ArrowRight size={18} />
           </Button>
         </form>
@@ -261,43 +263,47 @@ export default function App() {
 
   function renderQuiz() {
     return (
-      <main className="max-w-3xl mx-auto py-10 animate-fadeIn px-4">
-        <header className="mb-16 flex justify-between items-end border-b border-[#EFEBE9] pb-8">
+      <main className="max-w-3xl mx-auto py-8 sm:py-10 animate-fadeIn px-2 sm:px-4">
+        <header className="mb-12 sm:mb-16 flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 sm:gap-0 border-b border-[#EFEBE9] pb-6 sm:pb-8">
           <div>
-            <span className="text-[#795548] text-xs font-bold uppercase tracking-widest mb-2 block">Diagnóstico v2.0</span>
-            <h2 className="text-4xl font-serif text-[#3E2723]">Nível de Competência</h2>
+            <span className="text-[#795548] text-xs sm:text-[0.72rem] font-bold uppercase tracking-widest mb-2 block">Diagnóstico v2.0</span>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif text-[#3E2723]">Nível de Competência</h2>
           </div>
           <div className="text-right">
-            <span className="text-3xl font-serif text-[#5D4037]">{answeredQuestionsCount} <span className="text-lg text-[#795548]">/ {questions.length}</span></span>
+            <span className="text-3xl font-serif text-[#5D4037]">{answeredQuestionsCount} <span className="text-lg text-[#795548]">/ {questionsCount}</span></span>
           </div>
         </header>
 
         {isLoading ? (
           <div className="text-center py-20 text-[#5D4037] font-medium">Carregando perguntas...</div>
+        ) : questionsCount === 0 ? (
+          <div className="text-center py-20 text-[#5D4037] font-medium">
+            Nenhuma pergunta foi carregada. Verifique sua conexão ou tente recarregar a página.
+          </div>
         ) : (
           <>
             <div className="space-y-12">
-              {questions.map((question, index) => (
-                <fieldset key={question.id} className="relative group border-0 p-0 m-0">
-                  <legend className="sr-only">{question.prompt}</legend>
+              {(questions ?? []).map((question, index) => (
+                <fieldset key={question?.id ?? index} className="relative group border-0 p-0 m-0">
+                  <legend className="sr-only">{question?.prompt ?? 'Pergunta indisponível'}</legend>
                   <div className="flex items-start gap-4 mb-4">
                     <span className="w-8 h-8 rounded-full bg-[#EFEBE9] flex items-center justify-center text-[#5D4037] font-bold text-xs shrink-0">{index + 1}</span>
                     <div>
-                      <p className="text-xl text-[#3E2723] mb-2 font-bold leading-tight">{question.prompt}</p>
+                      <p className="text-xl text-[#3E2723] mb-2 font-bold leading-tight">{question?.prompt ?? 'Pergunta indisponível'}</p>
                       <div className="flex items-center gap-2 text-[#5D4037] bg-[#EFEBE9] px-4 py-3 rounded-xl text-sm border border-[#D7CCC8]">
                         <Info size={16} className="shrink-0" />
-                        <p className="text-sm font-medium leading-normal">{question.guidance[(answers[question.id]?.toString() || '1') as keyof typeof question.guidance]}</p>
+                        <p className="text-sm font-medium leading-normal">{question?.guidance ? question.guidance[(answers[question.id]?.toString() || '1') as keyof typeof question.guidance] : 'Sem orientação'}</p>
                       </div>
                     </div>
                   </div>
-                  <div className="flex gap-4 pl-12 mt-4">
+                  <div className="grid grid-cols-3 sm:grid-cols-5 gap-2 pl-0 sm:pl-12 mt-4">
                     {[1,2,3,4,5].map((value) => (
                       <button
                         key={value}
                         type="button"
-                        onClick={() => setAnswers((current) => ({ ...current, [question.id]: value }))}
-                        className={`flex-1 h-14 rounded-2xl border-2 transition-all font-bold text-lg cursor-pointer ${
-                          answers[question.id] === value
+                        onClick={() => setAnswers((current) => ({ ...current, [question?.id ?? '']: value }))}
+                        className={`h-14 rounded-2xl border-2 transition-all font-bold text-lg cursor-pointer ${
+                          answers[question?.id ?? ''] === value
                             ? 'bg-[#5D4037] border-[#5D4037] text-white shadow-lg -translate-y-1'
                             : 'border-[#795548] text-[#5D4037] hover:border-[#5D4037] bg-white'
                         }`}
@@ -310,7 +316,7 @@ export default function App() {
               ))}
             </div>
             <div className="mt-20 flex justify-center">
-              <Button className="w-full md:w-auto md:px-20 h-14 text-lg" onClick={handleSubmitDiagnostic} disabled={answeredQuestionsCount < questions.length || isSubmitting}>
+              <Button className="w-full md:w-auto md:px-20 h-14 text-lg" onClick={handleSubmitDiagnostic} disabled={answeredQuestionsCount < questionsCount || isSubmitting}>
                 {isSubmitting ? 'Gerando diagnóstico...' : 'Ver Análise Técnica'}
               </Button>
             </div>
@@ -324,8 +330,8 @@ export default function App() {
     if (!diagnostic) return null;
 
     return (
-      <main className="max-w-4xl mx-auto py-10 animate-fadeIn px-4">
-        <div className="bg-white rounded-[3rem] p-12 border border-[#EFEBE9] shadow-2xl relative overflow-hidden">
+      <main className="max-w-4xl mx-auto py-8 sm:py-10 animate-fadeIn px-2 sm:px-4">
+        <div className="bg-white rounded-[3rem] p-6 sm:p-8 md:p-12 border border-[#EFEBE9] shadow-2xl relative overflow-hidden">
           <div className="absolute top-0 right-0 w-64 h-64 bg-[#F5F2F0] rounded-full -mr-32 -mt-32 opacity-50" />
           <div className="flex flex-col items-center mb-16 relative z-10">
             <div className="w-20 h-20 bg-[#5D4037] rounded-3xl flex items-center justify-center mb-6 shadow-xl rotate-6">
@@ -596,9 +602,9 @@ export default function App() {
     const percentage = roadmap?.progress.completionPercentage ?? completionPercentage;
 
     return (
-      <div className="flex flex-col lg:flex-row min-h-[90vh] gap-10 animate-fadeIn px-4 lg:px-0">
-        <aside className="w-full lg:w-80 flex flex-col gap-6">
-          <div className="bg-white p-6 rounded-[2.5rem] border border-[#EFEBE9] shadow-xl sticky top-8 flex flex-col gap-6">
+      <div className="flex flex-col lg:flex-row min-h-[90vh] gap-6 sm:gap-8 animate-fadeIn px-4 lg:px-0">
+        <aside className="w-full lg:w-80 flex flex-col gap-6 lg:sticky lg:top-8 order-2 lg:order-1">
+          <div className="bg-white p-5 sm:p-6 md:p-6 lg:p-6 rounded-[2.5rem] border border-[#EFEBE9] shadow-xl flex flex-col gap-5">
             <div className="flex items-center gap-4 border-b border-[#F5F2F0] pb-6">
               <div className="w-14 h-14 bg-[#3E2723] rounded-2xl flex items-center justify-center text-[#FAF8F6] font-serif italic text-2xl shadow-lg">
                 {userName.charAt(0)}
@@ -637,7 +643,7 @@ export default function App() {
           </div>
         </aside>
 
-        <main className="flex-1 pb-20 relative">
+        <main className="flex-1 pb-20 relative order-1 lg:order-2">
           <header className="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 gap-6">
             <div>
               <h2 className="text-4xl font-serif text-[#3E2723] mb-2">
@@ -702,7 +708,7 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen bg-[#FAF8F6] p-6 lg:p-12 font-sans selection:bg-[#D7CCC8] selection:text-[#3E2723]">
+    <div className="min-h-screen bg-[#FAF8F6] p-4 sm:p-6 lg:p-12 font-sans selection:bg-[#D7CCC8] selection:text-[#3E2723]">
       <div className="max-w-7xl mx-auto">
         {step === 'home' && renderHome()}
         {step === 'quiz' && renderQuiz()}

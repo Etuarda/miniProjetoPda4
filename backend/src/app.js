@@ -38,6 +38,14 @@ export function createApp() {
   // Habilita parsing automático de JSON no body das requisições
   app.use(express.json());
 
+  // Endpoint base para teste rápido de deploy / root
+  app.get('/', (req, res) => res.status(200).json({
+    status: 'success',
+    message: 'Backend Roadmap Planner API está rodando',
+    uptime: process.uptime(),
+    env: process.env.NODE_ENV || 'development'
+  }));
+
   // Endpoint de saúde para monitoramento e verificação de disponibilidade da API
   app.get('/health', (req, res) => res.status(200).json({
     status: 'success',

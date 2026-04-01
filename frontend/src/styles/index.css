@@ -7,6 +7,14 @@
 @tailwind utilities;
 
 /* Estilos globais da aplicação */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  min-height: 100%;
+}
+
 body {
   font-family: 'Plus Jakarta Sans', sans-serif;
   background-color: #FAF8F6;
