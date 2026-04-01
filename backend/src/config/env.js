@@ -9,6 +9,6 @@ dotenv.config();
 export const env = {
   // Porta do servidor - permite override via variável de ambiente para deploy
   port: Number(process.env.PORT ?? 3000),
-  // Origem permitida para CORS - aceita múltiplas portas do Vite em desenvolvimento
-  corsOrigin: process.env.CORS_ORIGIN ?? 'http://localhost:5173',
+  // Origem permitida para CORS - aceita múltiplas origens separadas por vírgula
+  corsOrigin: process.env.CORS_ORIGIN ?? 'http://localhost:5173,http://localhost:5174',
 };

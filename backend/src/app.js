@@ -12,11 +12,17 @@ import { errorMiddleware } from './middlewares/error.middleware.js';
 export function createApp() {
   const app = express();
 
-  const allowedOrigins = [
-    env.corsOrigin,
+  const allowedOrigins = (env.corsOrigin || '')
+    .split(',')
+    .map(origin => origin.trim())
+    .filter(Boolean);
+
+  allowedOrigins.push(
+    'https://miniprojetopda4.onrender.com',
+    'https://miniprojetopda4-1.onrender.com',
     'http://localhost:5173',
     'http://localhost:5174'
-  ].filter(Boolean);
+  );
 
   app.use(cors({
     origin: (origin, callback) => {
