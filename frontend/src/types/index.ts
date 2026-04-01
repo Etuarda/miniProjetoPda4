@@ -10,7 +10,7 @@ export interface Question {
   id: string;
   axis: Axis;
   prompt: string;
-  guidance: string;
+  guidance: Record<'1' | '2' | '3' | '4' | '5', string>;
   weight: number;
 }
 

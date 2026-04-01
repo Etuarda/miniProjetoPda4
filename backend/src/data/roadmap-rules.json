@@ -1,22 +1,277 @@
 [
-  {"axis":"http","threshold":2,"tasks":[
-    {"title":"Revisar semântica HTTP e status codes","description":"Implemente endpoints usando GET, POST, PATCH e DELETE com status code coerente e payload consistente."},
-    {"title":"Estudar HTTPS, CORS e fluxo request/response","description":"Mapeie o caminho de uma requisição do cliente até a API e documente headers, CORS e diferenças entre HTTP e HTTPS."}
-  ]},
-  {"axis":"node","threshold":2,"tasks":[
-    {"title":"Praticar async/await com tratamento centralizado de erros","description":"Refatore handlers assíncronos para usar async/await, early return e middleware de erro."},
-    {"title":"Dominar modularização com ESM","description":"Separe um projeto em routes, controllers, services e repositories usando import/export com responsabilidade única."}
-  ]},
-  {"axis":"api","threshold":2,"tasks":[
-    {"title":"Construir CRUD REST com Express","description":"Implemente GET, POST, PATCH e DELETE com validação, respostas padronizadas e mensagens de erro claras."},
-    {"title":"Adicionar autenticação e noções de segurança","description":"Crie um fluxo simples de autenticação com hashing, JWT e revisão de vulnerabilidades comuns em APIs."}
-  ]},
-  {"axis":"database","threshold":2,"tasks":[
-    {"title":"Modelar banco relacional com SQL básico","description":"Crie duas entidades relacionadas e implemente consultas com relacionamento, chave estrangeira e integridade."},
-    {"title":"Comparar relacional vs NoSQL","description":"Descreva trade-offs de consistência, flexibilidade de schema e cenários de uso para cada abordagem."}
-  ]},
-  {"axis":"architecture","threshold":2,"tasks":[
-    {"title":"Aplicar MVC com Service Layer","description":"Separe um backend em routes, controllers, services e repositories com baixo acoplamento."},
-    {"title":"Melhorar observabilidade e manutenção","description":"Adicione logs básicos, tratamento de erros, estrutura previsível e checklist de escalabilidade para evolução futura."}
-  ]}
+  {
+    "axis": "http",
+    "levels": {
+      "1": [
+        {
+          "title": "Entender o papel do HTTP em uma API",
+          "description": "Estude requisição, resposta, headers, body e a diferença entre cliente e servidor."
+        },
+        {
+          "title": "Revisar métodos HTTP básicos",
+          "description": "Pratique GET, POST, PATCH e DELETE entendendo a intenção de cada método."
+        }
+      ],
+      "2": [
+        {
+          "title": "Aplicar status codes com consistência",
+          "description": "Implemente respostas usando 200, 201, 204, 400, 404 e 500 com significado correto."
+        },
+        {
+          "title": "Mapear ciclo request/response",
+          "description": "Descreva como uma requisição sai do cliente, chega ao servidor e retorna ao navegador."
+        }
+      ],
+      "3": [
+        {
+          "title": "Estudar idempotência e semântica HTTP",
+          "description": "Compare PUT e PATCH, entenda operações idempotentes e padronize contratos REST."
+        },
+        {
+          "title": "Explorar headers e cache HTTP",
+          "description": "Pratique uso de Content-Type, Authorization, Cache-Control e headers comuns de APIs."
+        }
+      ],
+      "4": [
+        {
+          "title": "Aprofundar em HTTPS, CORS e segurança de transporte",
+          "description": "Entenda TLS, preflight, políticas de origem e impacto de configuração incorreta em APIs."
+        },
+        {
+          "title": "Projetar contratos HTTP mais robustos",
+          "description": "Defina convenções para paginação, filtros, ordenação e erros padronizados."
+        }
+      ],
+      "5": [
+        {
+          "title": "Analisar performance e comportamento avançado de HTTP",
+          "description": "Estude caching strategy, conditional requests, proxies, observabilidade e trade-offs de transporte."
+        },
+        {
+          "title": "Documentar padrões HTTP do sistema",
+          "description": "Crie um guia interno de convenções HTTP para manter consistência entre serviços."
+        }
+      ]
+    }
+  },
+  {
+    "axis": "node",
+    "levels": {
+      "1": [
+        {
+          "title": "Praticar async/await no Node.js",
+          "description": "Refatore operações assíncronas simples usando async/await e tratamento básico com try/catch."
+        },
+        {
+          "title": "Separar código em módulos ESM",
+          "description": "Organize arquivos com import/export e elimine scripts longos com múltiplas responsabilidades."
+        }
+      ],
+      "2": [
+        {
+          "title": "Aplicar funções pequenas e responsabilidade única",
+          "description": "Refatore handlers e utilitários para que cada função resolva um único problema."
+        },
+        {
+          "title": "Melhorar tratamento de erros assíncronos",
+          "description": "Use early return, middlewares de erro e evite repetição de try/catch no controller."
+        }
+      ],
+      "3": [
+        {
+          "title": "Entender Event Loop e concorrência no Node.js",
+          "description": "Estude call stack, task queue, microtasks, Promises e impacto disso no backend."
+        },
+        {
+          "title": "Padronizar configuração e bootstrap da aplicação",
+          "description": "Centralize env, inicialização do servidor, middlewares e rotas para manter previsibilidade."
+        }
+      ],
+      "4": [
+        {
+          "title": "Aprofundar em streams, buffers e I/O eficiente",
+          "description": "Pratique leitura e processamento de dados grandes sem carregar tudo em memória."
+        },
+        {
+          "title": "Analisar limites de CPU e tarefas pesadas",
+          "description": "Entenda quando operações intensivas bloqueiam o runtime e como mitigar esse impacto."
+        }
+      ],
+      "5": [
+        {
+          "title": "Projetar serviços Node.js com foco em resiliência",
+          "description": "Aplique estratégias de observabilidade, isolamento de responsabilidades e evolução controlada."
+        },
+        {
+          "title": "Definir padrões internos de código para backend Node.js",
+          "description": "Crie convenções de modularização, naming, erro, validação e organização arquitetural."
+        }
+      ]
+    }
+  },
+  {
+    "axis": "api",
+    "levels": {
+      "1": [
+        {
+          "title": "Criar rotas REST simples com Express",
+          "description": "Implemente endpoints básicos entendendo rota, parâmetro, body e resposta JSON."
+        },
+        {
+          "title": "Montar um CRUD inicial",
+          "description": "Crie operações de leitura, criação, atualização e remoção com estrutura simples."
+        }
+      ],
+      "2": [
+        {
+          "title": "Adicionar validação de payload",
+          "description": "Valide entradas com Zod e impeça dados inválidos de entrarem na regra de negócio."
+        },
+        {
+          "title": "Padronizar respostas da API",
+          "description": "Defina formato consistente para sucesso, erro, mensagens e estrutura de retorno."
+        }
+      ],
+      "3": [
+        {
+          "title": "Refinar design de endpoints e contratos",
+          "description": "Revise nomes de recursos, versionamento, query params, filtros e coerência da API."
+        },
+        {
+          "title": "Aplicar autenticação básica",
+          "description": "Implemente um fluxo inicial com hashing, login, token e proteção de rotas."
+        }
+      ],
+      "4": [
+        {
+          "title": "Aprofundar em segurança de APIs",
+          "description": "Estude autorização, rate limiting, tratamento de credenciais e riscos comuns em APIs."
+        },
+        {
+          "title": "Melhorar experiência de consumo da API",
+          "description": "Documente endpoints, exemplos de payload e mensagens de erro úteis para clientes."
+        }
+      ],
+      "5": [
+        {
+          "title": "Projetar APIs evolutivas e sustentáveis",
+          "description": "Defina padrões para compatibilidade, governança de endpoints e escalabilidade do contrato."
+        },
+        {
+          "title": "Analisar trade-offs de arquitetura de integração",
+          "description": "Compare REST com outras abordagens e avalie impacto em performance, acoplamento e manutenção."
+        }
+      ]
+    }
+  },
+  {
+    "axis": "database",
+    "levels": {
+      "1": [
+        {
+          "title": "Revisar modelagem relacional básica",
+          "description": "Pratique criação de tabelas, chaves primárias, tipos de dados e relacionamento simples."
+        },
+        {
+          "title": "Executar CRUD com SQL básico",
+          "description": "Implemente INSERT, SELECT, UPDATE e DELETE em cenários pequenos."
+        }
+      ],
+      "2": [
+        {
+          "title": "Trabalhar com relacionamentos e joins",
+          "description": "Modele 1:N e use joins para consultar dados relacionados com clareza."
+        },
+        {
+          "title": "Reforçar integridade e consistência",
+          "description": "Estude chave estrangeira, restrições e impacto de dados inconsistentes na aplicação."
+        }
+      ],
+      "3": [
+        {
+          "title": "Comparar relacional e NoSQL",
+          "description": "Analise cenários de uso, flexibilidade de schema, consistência e modelo de acesso."
+        },
+        {
+          "title": "Pensar em performance de consultas",
+          "description": "Estude índice, cardinalidade, filtros e estrutura de consulta com impacto real."
+        }
+      ],
+      "4": [
+        {
+          "title": "Aprofundar em estratégia de persistência",
+          "description": "Avalie trade-offs de modelagem, crescimento de volume e responsabilidades entre aplicação e banco."
+        },
+        {
+          "title": "Padronizar acesso a dados com camada de repositório",
+          "description": "Centralize persistência para reduzir acoplamento e facilitar evolução para outro banco."
+        }
+      ],
+      "5": [
+        {
+          "title": "Projetar persistência com visão de escalabilidade",
+          "description": "Analise particionamento, concorrência, consistência e evolução de dados em sistemas maiores."
+        },
+        {
+          "title": "Definir critérios técnicos de escolha de banco",
+          "description": "Construa uma matriz simples de decisão para escolher abordagem relacional ou não relacional."
+        }
+      ]
+    }
+  },
+  {
+    "axis": "architecture",
+    "levels": {
+      "1": [
+        {
+          "title": "Separar rotas, controllers e services",
+          "description": "Saia de arquivos únicos e distribua responsabilidades básicas do backend."
+        },
+        {
+          "title": "Aplicar organização mínima de projeto",
+          "description": "Estruture pastas por responsabilidade e padronize nomes de arquivos e funções."
+        }
+      ],
+      "2": [
+        {
+          "title": "Introduzir repositories e isolamento de persistência",
+          "description": "Remova acesso direto a dados dos services e controllers usando camada própria."
+        },
+        {
+          "title": "Centralizar tratamento de erros",
+          "description": "Padronize AppError, middleware global e respostas coerentes para erros de negócio."
+        }
+      ],
+      "3": [
+        {
+          "title": "Consolidar MVC com Service Layer",
+          "description": "Refine fronteiras entre HTTP, domínio e persistência para reduzir acoplamento."
+        },
+        {
+          "title": "Aplicar regras de Clean Code no backend",
+          "description": "Revise nomes, tamanho de funções, duplicação e responsabilidades por módulo."
+        }
+      ],
+      "4": [
+        {
+          "title": "Melhorar observabilidade e manutenção",
+          "description": "Adicione logs úteis, health check, convenções de resposta e revisão de fluxo operacional."
+        },
+        {
+          "title": "Planejar evolução para banco real e testes",
+          "description": "Estruture o sistema para migrar de JSON para banco sem quebrar contratos da aplicação."
+        }
+      ],
+      "5": [
+        {
+          "title": "Projetar arquitetura para crescimento previsível",
+          "description": "Defina limites de contexto, padrões de expansão e critérios para novas camadas ou serviços."
+        },
+        {
+          "title": "Formalizar padrões internos de backend",
+          "description": "Escreva guidelines de arquitetura, validação, erro, persistência e organização para o projeto."
+        }
+      ]
+    }
+  }
 ]

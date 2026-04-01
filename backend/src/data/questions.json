@@ -1,12 +1,132 @@
 [
-  {"id":"q-http-1","axis":"http","prompt":"Você entende diferença entre GET, POST, PATCH e DELETE?","guidance":"1: usa sem clareza. 3: entende semântica e status codes. 5: aplica idempotência e contrato com consistência.","weight":1},
-  {"id":"q-http-2","axis":"http","prompt":"Você entende DNS, HTTPS, CORS e o ciclo básico de request/response?","guidance":"1: conhece termos. 3: entende fluxo no navegador e no servidor. 5: explica headers, cache e implicações de segurança.","weight":1},
-  {"id":"q-node-1","axis":"node","prompt":"Qual seu domínio sobre Promises, async/await e tratamento de erros assíncronos no Node.js?","guidance":"1: usa com insegurança. 3: domina async/await e try/catch. 5: entende event loop e concorrência.","weight":1},
-  {"id":"q-node-2","axis":"node","prompt":"Você consegue estruturar módulos ESM e funções pequenas com responsabilidades bem separadas?","guidance":"1: mistura regras e HTTP. 3: separa por arquivos. 5: organiza camadas e contratos de forma consistente.","weight":1},
-  {"id":"q-api-1","axis":"api","prompt":"Você sabe criar um CRUD REST com Express, validação de entrada e respostas padronizadas?","guidance":"1: cria rotas simples. 3: usa middlewares e valida payload. 5: projeta contratos estáveis e trata edge cases.","weight":1},
-  {"id":"q-api-2","axis":"api","prompt":"Você sabe proteger uma API com autenticação e noções básicas de segurança?","guidance":"1: conhece JWT por alto. 3: implementa autenticação e hashing. 5: entende autorização, rate limiting e mitigação de riscos.","weight":1},
-  {"id":"q-database-1","axis":"database","prompt":"Você sabe modelar tabelas relacionais, chaves e consultas SQL básicas?","guidance":"1: CRUD simples. 3: trabalha com joins e modelagem 1:N. 5: pensa em integridade, índice e trade-offs.","weight":1},
-  {"id":"q-database-2","axis":"database","prompt":"Você entende quando usar banco relacional ou NoSQL em cenários diferentes?","guidance":"1: decide por familiaridade. 3: entende diferenças práticas. 5: analisa consistência, escala e modelagem.","weight":1},
-  {"id":"q-architecture-1","axis":"architecture","prompt":"Você costuma separar controllers, services e repositories em projetos backend?","guidance":"1: tudo em um arquivo. 3: separa camadas. 5: mantém baixo acoplamento e evolução previsível.","weight":1},
-  {"id":"q-architecture-2","axis":"architecture","prompt":"Você pensa em escalabilidade, observabilidade e manutenção ao projetar uma API?","guidance":"1: foca só em entregar. 3: pensa em logs, erros e crescimento básico. 5: projeta para mudanças e resiliência.","weight":1}
+  {
+    "id": "q-http-1",
+    "axis": "http",
+    "prompt": "Como você avalia seu domínio sobre métodos HTTP e sua semântica em APIs REST?",
+    "guidance": {
+      "1": "Conhece os nomes GET, POST, PATCH e DELETE, mas ainda usa sem entender bem quando aplicar cada um.",
+      "2": "Consegue usar os métodos em CRUDs simples, mas ainda confunde intenção, atualização parcial e contratos.",
+      "3": "Entende a diferença entre os métodos e aplica corretamente em cenários comuns de API.",
+      "4": "Usa métodos e status codes com consistência, incluindo noções de idempotência e clareza de contrato.",
+      "5": "Domina semântica HTTP, idempotência, padronização de contratos e consegue definir convenções para APIs maiores."
+    },
+    "weight": 1
+  },
+  {
+    "id": "q-http-2",
+    "axis": "http",
+    "prompt": "Qual seu nível de entendimento sobre DNS, HTTPS, CORS e o ciclo de request/response?",
+    "guidance": {
+      "1": "Reconhece alguns termos, mas ainda não entende claramente como uma requisição percorre cliente, rede e servidor.",
+      "2": "Entende o fluxo básico entre navegador e API, mas ainda tem dúvidas sobre DNS, HTTPS ou CORS.",
+      "3": "Explica o ciclo request/response em cenários comuns e entende o papel de DNS, HTTPS e CORS.",
+      "4": "Consegue relacionar cabeçalhos, preflight, segurança de transporte e impacto de configuração no backend.",
+      "5": "Domina o fluxo de comunicação web, políticas de origem, camadas da requisição e implicações arquiteturais."
+    },
+    "weight": 1
+  },
+  {
+    "id": "q-node-1",
+    "axis": "node",
+    "prompt": "Como você avalia seu domínio sobre Promises, async/await e tratamento de erros assíncronos no Node.js?",
+    "guidance": {
+      "1": "Ainda depende de exemplos prontos e sente insegurança ao trabalhar com código assíncrono.",
+      "2": "Consegue usar async/await em fluxos simples, mas ainda erra encadeamento, tratamento de erro ou retorno.",
+      "3": "Usa async/await com autonomia em serviços e controllers, incluindo try/catch em cenários comuns.",
+      "4": "Consegue estruturar fluxos assíncronos com clareza, evitar aninhamento desnecessário e tratar erros de forma consistente.",
+      "5": "Domina concorrência, fluxo assíncrono, impacto no runtime e toma decisões melhores em cenários mais complexos."
+    },
+    "weight": 1
+  },
+  {
+    "id": "q-node-2",
+    "axis": "node",
+    "prompt": "Como você avalia sua capacidade de modularizar projetos backend com ESM e funções de responsabilidade única?",
+    "guidance": {
+      "1": "Ainda mistura muitas responsabilidades no mesmo arquivo ou função e organiza pouco os módulos.",
+      "2": "Já separa alguns arquivos, mas ainda mistura HTTP, regra de negócio e persistência com frequência.",
+      "3": "Consegue estruturar projetos em módulos separados e criar funções menores em boa parte do código.",
+      "4": "Organiza bem camadas, contratos e responsabilidades, mantendo funções pequenas e previsíveis.",
+      "5": "Domina modularização com ESM, coesão, baixo acoplamento e padronização estrutural de backend."
+    },
+    "weight": 1
+  },
+  {
+    "id": "q-api-1",
+    "axis": "api",
+    "prompt": "Como você avalia sua capacidade de criar um CRUD REST com Express, validação e respostas padronizadas?",
+    "guidance": {
+      "1": "Consegue criar rotas básicas, mas ainda sem consistência de validação, status code ou resposta.",
+      "2": "Já implementa CRUD funcional, mas ainda com validações frágeis e contratos inconsistentes.",
+      "3": "Monta CRUD com Express, valida payloads e devolve respostas coerentes em cenários comuns.",
+      "4": "Projeta endpoints com melhor consistência, boas mensagens de erro e contratos mais bem definidos.",
+      "5": "Domina design de APIs REST, padronização de respostas e evolução de contratos com visão de manutenção."
+    },
+    "weight": 1
+  },
+  {
+    "id": "q-api-2",
+    "axis": "api",
+    "prompt": "Qual seu nível em autenticação e segurança básica de APIs backend?",
+    "guidance": {
+      "1": "Conhece JWT ou autenticação só por alto e ainda não implementou fluxo completo com segurança.",
+      "2": "Já montou autenticação simples, mas ainda com insegurança sobre hashing, token e proteção de rotas.",
+      "3": "Consegue implementar autenticação com hashing e token em projetos pequenos com autonomia.",
+      "4": "Entende melhor autorização, proteção de endpoints, erros de autenticação e riscos comuns em APIs.",
+      "5": "Domina fundamentos de segurança em APIs, consegue revisar vulnerabilidades comuns e propor controles melhores."
+    },
+    "weight": 1
+  },
+  {
+    "id": "q-database-1",
+    "axis": "database",
+    "prompt": "Como você avalia sua capacidade de modelar tabelas relacionadas e escrever SQL básico com consistência?",
+    "guidance": {
+      "1": "Consegue fazer operações muito simples, mas ainda tem dificuldade com modelagem e relacionamentos.",
+      "2": "Entende CRUD em banco relacional, mas ainda erra relações, joins ou integridade com frequência.",
+      "3": "Modela tabelas simples com relações 1:N e escreve consultas SQL comuns com autonomia.",
+      "4": "Pensa em integridade, consistência, melhor estrutura de consulta e organização da persistência.",
+      "5": "Domina modelagem relacional em cenários mais robustos e toma decisões melhores sobre estrutura de dados."
+    },
+    "weight": 1
+  },
+  {
+    "id": "q-database-2",
+    "axis": "database",
+    "prompt": "Qual seu nível de entendimento sobre quando usar banco relacional ou NoSQL?",
+    "guidance": {
+      "1": "Ainda escolhe banco mais por familiaridade do que por critério técnico.",
+      "2": "Já entende que existem diferenças, mas ainda tem dificuldade em comparar cenários de uso.",
+      "3": "Consegue explicar diferenças práticas entre relacional e NoSQL em casos comuns.",
+      "4": "Avalia trade-offs de modelagem, consistência, flexibilidade e acesso a dados com mais clareza.",
+      "5": "Domina comparação entre abordagens de persistência e consegue justificar tecnicamente a escolha."
+    },
+    "weight": 1
+  },
+  {
+    "id": "q-architecture-1",
+    "axis": "architecture",
+    "prompt": "Como você avalia sua capacidade de separar controllers, services e repositories em projetos backend?",
+    "guidance": {
+      "1": "Ainda costuma concentrar muitas responsabilidades em poucos arquivos ou funções.",
+      "2": "Já separa algumas camadas, mas ainda mistura regra de negócio, HTTP e persistência.",
+      "3": "Consegue aplicar separação básica entre controller, service e repository em projetos pequenos.",
+      "4": "Mantém fronteiras mais claras entre camadas e reduz acoplamento com consistência.",
+      "5": "Domina separação de responsabilidades e consegue estruturar backends com evolução previsível."
+    },
+    "weight": 1
+  },
+  {
+    "id": "q-architecture-2",
+    "axis": "architecture",
+    "prompt": "Como você avalia sua preocupação com manutenção, observabilidade e escalabilidade ao projetar uma API?",
+    "guidance": {
+      "1": "Hoje o foco maior é fazer funcionar, sem pensar muito em manutenção futura ou monitoramento.",
+      "2": "Já considera alguns pontos de organização, mas ainda de forma pouco estruturada.",
+      "3": "Pensa em logs, erros, previsibilidade e crescimento básico do sistema em projetos backend.",
+      "4": "Projeta com mais cuidado para manutenção, consistência operacional e evolução do código.",
+      "5": "Tem visão arquitetural mais madura, considerando observabilidade, escalabilidade e sustentabilidade do sistema."
+    },
+    "weight": 1
+  }
 ]

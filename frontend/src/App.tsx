@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import {
   ArrowRight, Award, BarChart3, BookOpen, Check, Circle, Clock, FileText, Info,
   LayoutDashboard, Leaf, LogOut, PieChart, Plus, RefreshCw, Settings, Sparkles,
@@ -57,6 +57,15 @@ export default function App() {
   const completedTasks = tasks.filter((task) => task.status === 'completed').length;
   // Porcentagem de conclusão do roadmap
   const completionPercentage = tasks.length ? Math.round((completedTasks / tasks.length) * 100) : 0;
+
+  // Carrega notas do localStorage uma vez no início
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const savedNotes = localStorage.getItem('generalNotes');
+    if (savedNotes !== null) {
+      setGeneralNotes(savedNotes);
+    }
+  }, []);
 
   /**
    * Submete diagnóstico para o backend após validação completa.
@@ -211,6 +220,7 @@ export default function App() {
     setTasks([]);
     setActiveTask(null);
     setGeneralNotes('');
+    localStorage.removeItem('generalNotes');
     setIsAddingTask(false);
     setNewTaskTitle('');
     setNewTaskDescription('');
@@ -224,7 +234,7 @@ export default function App() {
         </div>
         <h1 className="text-5xl md:text-7xl font-serif text-[#3E2723] mb-4 text-center">Backend Architect</h1>
         <p className="text-[#5D4037] text-lg mb-12 text-center max-w-lg leading-relaxed font-medium">
-          Uma plataforma de auto-análise para desenvolvedores que buscam o próximo nível de excelência em Node.js e Sistemas.
+          Uma plataforma de auto-análise para estudantes de desenvolvimennto que buscam o próximo nível de excelência em sistemas Node.js.
         </p>
 
         <form
@@ -276,7 +286,7 @@ export default function App() {
                       <p className="text-xl text-[#3E2723] mb-2 font-bold leading-tight">{question.prompt}</p>
                       <div className="flex items-center gap-2 text-[#5D4037] bg-[#EFEBE9] px-4 py-3 rounded-xl text-sm border border-[#D7CCC8]">
                         <Info size={16} className="shrink-0" />
-                        <p className="text-sm font-medium leading-normal">{question.guidance}</p>
+                        <p className="text-sm font-medium leading-normal">{question.guidance[(answers[question.id]?.toString() || '1') as keyof typeof question.guidance]}</p>
                       </div>
                     </div>
                   </div>
@@ -443,9 +453,6 @@ export default function App() {
               <button type="button" onClick={() => setGeneralNotes('')} className="p-2 text-[#795548] hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-colors">
                 <Trash2 size={18} />
               </button>
-              <button type="button" onClick={() => handleCopy(generalNotes)} className="p-2 text-[#795548] hover:text-[#5D4037] hover:bg-[#EFEBE9] rounded-lg transition-colors">
-                <FileText size={18} />
-              </button>
             </div>
           </div>
           <div className="flex-1 bg-[#FFFCF9] relative notepad-container">
@@ -474,12 +481,7 @@ export default function App() {
                 />
               </div>
             </article>
-          )) : (
-            <div className="text-center py-20 opacity-60 bg-white rounded-[2.5rem] border border-dashed border-[#EFEBE9]">
-              <FileText className="mx-auto mb-4 text-[#795548]" size={48} />
-              <p className="font-serif italic text-[#5D4037]">Você ainda não possui anotações nos módulos.</p>
-            </div>
-          )}
+          )) : null}
         </div>
       </section>
     );
@@ -568,9 +570,6 @@ export default function App() {
               <div className="flex items-center gap-2">
                 <button type="button" onClick={() => void handleUpdateTask(activeTask.id, { notes: '' })} className="p-2 text-[#795548] hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-colors">
                   <Trash2 size={18} />
-                </button>
-                <button type="button" onClick={() => handleCopy(activeTask.notes)} className="p-2 text-[#795548] hover:text-[#5D4037] hover:bg-[#EFEBE9] rounded-lg transition-colors">
-                  <FileText size={18} />
                 </button>
               </div>
             </div>

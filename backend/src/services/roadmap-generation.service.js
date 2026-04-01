@@ -1,56 +1,105 @@
-import { readFileSync } from 'fs';
+import { readFile } from 'node:fs/promises';
 import { generateId } from '../utils/id.js';
 
-// Carrega regras de negócio para geração de roadmap a partir de arquivo JSON estático
-const roadmapRules = JSON.parse(
-  readFileSync(new URL('../data/roadmap-rules.json', import.meta.url), 'utf8')
-);
+const ROADMAP_RULES_PATH = new URL('../data/roadmap-rules.json', import.meta.url);
+const MIN_LEVEL = 1;
+const MAX_LEVEL = 5;
 
 /**
- * Limite padrão para considerar uma competência como "lacuna" no diagnóstico.
- * Valores menores indicam maior rigidez na identificação de gaps.
+ * Lê as regras de roadmap do arquivo JSON.
+ * Mantém as regras externas ao código para facilitar manutenção.
  */
-export const DEFAULT_GAP_THRESHOLD = 2;
-
-/**
- * Identifica lacunas no conhecimento baseado nas pontuações do diagnóstico.
- * Regra de negócio: pontuações baixas indicam necessidade de aprendizado.
- */
-export function identifyGaps(scores) {
-  return roadmapRules.filter((rule) => {
-    const score = scores[rule.axis];
-    const threshold = rule.threshold ?? DEFAULT_GAP_THRESHOLD;
-    return score <= threshold;
-  });
+async function readRoadmapRules() {
+  const fileContent = await readFile(ROADMAP_RULES_PATH, 'utf-8');
+  return JSON.parse(fileContent);
 }
 
 /**
- * Gera título padronizado para roadmap personalizado.
- * Formato: "Roadmap Backend Node.js - [Nome do Usuário]"
+ * Garante que o score seja convertido para um nível válido entre 1 e 5.
+ * Exemplo:
+ * 1.0 -> 1
+ * 2.7 -> 2
+ * 4.9 -> 4
+ * 5.0 -> 5
+ */
+export function normalizeScoreToLevel(score) {
+  if (typeof score !== 'number' || Number.isNaN(score)) {
+    return MIN_LEVEL;
+  }
+
+  const normalizedLevel = Math.floor(score);
+
+  if (normalizedLevel < MIN_LEVEL) {
+    return MIN_LEVEL;
+  }
+
+  if (normalizedLevel > MAX_LEVEL) {
+    return MAX_LEVEL;
+  }
+
+  return normalizedLevel;
+}
+
+/**
+ * Gera título padronizado do roadmap.
  */
 export function buildRoadmapTitle(userName) {
   return `Roadmap Backend Node.js - ${userName}`;
 }
 
 /**
- * Cria tarefas do roadmap baseado nas lacunas identificadas.
- * Cada regra de negócio pode gerar múltiplas tarefas relacionadas.
+ * Retorna as tarefas do nível atual até o nível 5.
+ * Isso garante que todos os perfis recebam um roadmap.
  */
-export function buildRoadmapTasks(roadmapId, scores) {
-  const matchedRules = identifyGaps(scores);
-  return matchedRules.flatMap((rule) =>
-    rule.tasks.map((task) => ({
-      id: generateId(),
-      roadmapId,
-      axis: rule.axis,
-      title: task.title,
-      description: task.description,
-      status: 'pending', // Estado inicial padrão para novas tarefas
-      explanation: '',
-      experiment: '',
-      notes: '',
-      createdAt: new Date().toISOString(),
-      updatedAt: null, // Null indica tarefa nunca modificada
-    }))
-  );
+export function getProgressiveTasksForAxis(axisRule, score) {
+  const currentLevel = normalizeScoreToLevel(score);
+  const tasks = [];
+
+  for (let level = currentLevel; level <= MAX_LEVEL; level += 1) {
+    const levelTasks = axisRule.levels?.[String(level)] ?? [];
+
+    for (const task of levelTasks) {
+      tasks.push({
+        axis: axisRule.axis,
+        targetLevel: level,
+        title: task.title,
+        description: task.description
+      });
+    }
+  }
+
+  return tasks;
+}
+
+/**
+ * Gera tarefas do roadmap com base nos scores do diagnóstico.
+ * Cada eixo sempre produz uma trilha progressiva do nível atual até o avançado.
+ */
+export async function buildRoadmapTasks(roadmapId, scores) {
+  const roadmapRules = await readRoadmapRules();
+  const tasks = [];
+
+  for (const axisRule of roadmapRules) {
+    const axisScore = scores[axisRule.axis];
+    const progressiveTasks = getProgressiveTasksForAxis(axisRule, axisScore);
+
+    for (const task of progressiveTasks) {
+      tasks.push({
+        id: generateId(),
+        roadmapId,
+        axis: task.axis,
+        targetLevel: task.targetLevel,
+        title: task.title,
+        description: task.description,
+        status: 'pending',
+        explanation: '',
+        experiment: '',
+        notes: '',
+        createdAt: new Date().toISOString(),
+        updatedAt: null
+      });
+    }
+  }
+
+  return tasks;
 }
