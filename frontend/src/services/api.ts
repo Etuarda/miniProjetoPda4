@@ -2,8 +2,8 @@ import axios from 'axios';
 
 /**
  * Cliente HTTP configurado para comunicação com a API backend.
- * Base URL aponta para servidor de desenvolvimento local.
+ * A base URL vem de variável de ambiente Vite para suportar deploy em produção.
  */
 export const api = axios.create({
-  baseURL: 'http://localhost:3000/api/v1'
+  baseURL: import.meta.env.VITE_API_BASE_URL
 });

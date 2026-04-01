@@ -12,16 +12,20 @@ import { errorMiddleware } from './middlewares/error.middleware.js';
 export function createApp() {
   const app = express();
 
-  // Habilita CORS para permitir requisições do frontend em desenvolvimento
-  // Aceita múltiplas origens do Vite (5173, 5174, etc.)
+  const allowedOrigins = [
+    env.corsOrigin,
+    'http://localhost:5173',
+    'http://localhost:5174'
+  ].filter(Boolean);
+
   app.use(cors({
     origin: (origin, callback) => {
-      // Permite requests sem origin (como mobile apps) e origens do localhost
-      if (!origin || /^http:\/\/localhost:\d+$/.test(origin)) {
+      if (!origin || allowedOrigins.includes(origin)) {
         callback(null, true);
-      } else {
-        callback(new Error('Not allowed by CORS'));
+        return;
       }
+
+      callback(new Error('Not allowed by CORS'));
     }
   }));
 
